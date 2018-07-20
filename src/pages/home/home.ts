@@ -19,7 +19,7 @@ export class HomePage {
     this.menu.swipeEnable(false);
   }
 
-   ionViewDidLeave(){
-     this.menu.swipeEnable(true);
-   }
+  ionViewDidLeave(){
+    this.menu.swipeEnable(true);
+  }
 }
