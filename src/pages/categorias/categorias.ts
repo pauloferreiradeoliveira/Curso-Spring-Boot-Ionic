@@ -33,8 +33,6 @@ export class CategoriasPage {
     this.categoriaService.findAll()
       .subscribe(response => {
         this.items = response;
-      },erro => {
-        console.log(erro);
-      });
+      },erro => {});
   }
 }
