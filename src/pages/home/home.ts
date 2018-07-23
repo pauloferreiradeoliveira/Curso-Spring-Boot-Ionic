@@ -19,7 +19,7 @@ export class HomePage {
   public login(){
     this.auth.authenricate(this.creds)
       .subscribe(response => {
-        console.log(response.headers.get('Authorization'));
+        this.auth.successfulLogin(response.headers.get('Authorization'));
         this.navCtrl.setRoot('CategoriasPage');
       },
     error => {});
