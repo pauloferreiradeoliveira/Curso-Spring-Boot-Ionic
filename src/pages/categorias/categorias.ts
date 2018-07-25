@@ -34,5 +34,9 @@ export class CategoriasPage {
       .subscribe(response => {
         this.items = response;
       },erro => {});
-  }
+    }
+
+    showProdutos() {
+      this.navCtrl.push('ProdutosPage');
+    }
 }
