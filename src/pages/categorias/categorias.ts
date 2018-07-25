@@ -24,7 +24,8 @@ export class CategoriasPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public categoriaService: CategoriaService) {
+    public categoriaService: CategoriaService
+  ) {
 
   }
 
@@ -36,7 +37,7 @@ export class CategoriasPage {
       },erro => {});
     }
 
-    showProdutos() {
-      this.navCtrl.push('ProdutosPage');
+    showProdutos(categoria_id: string) {
+      this.navCtrl.push('ProdutosPage',{categoria_id: categoria_id});
     }
 }
