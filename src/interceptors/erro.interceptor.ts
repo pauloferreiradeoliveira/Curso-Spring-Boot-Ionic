@@ -3,6 +3,7 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS
 import { Observable } from "rxjs/Rx";
 import { StorageService } from "../services/storage.service";
 import { AlertController } from "ionic-angular";
+import { FieldMessage } from "../models/fieldMessage";
 
 
 @Injectable()
@@ -31,7 +32,11 @@ export class ErrorInterceptor implements HttpInterceptor{
             break;
 
           case 403:
-            this.handle403;
+            this.handle403();
+            break;
+
+          case 422:
+            this.handle422(erroObj);
             break;
 
           default:
@@ -40,6 +45,26 @@ export class ErrorInterceptor implements HttpInterceptor{
 
         return Observable.throw(erroObj);
       }) as any
+  }
+
+  private handle422(erroObj){
+    let alert = this.alertController.create({
+      title: 'Erro de Validação',
+      message: this.listErrors(erroObj.errors),
+      enableBackdropDismiss: false,
+      buttons: [
+        {text: 'OK'}
+      ]
+    });
+    alert.present();
+  }
+
+  private listErrors(obj: FieldMessage[]): string{
+    let s: string = '';
+    obj.forEach(element => {
+        s += `<p><strong> ${element.fieldName}:</strong> ${element.message}</p>`
+    });
+    return s;
   }
 
   private handle403(){
