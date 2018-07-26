@@ -7,6 +7,7 @@ import { CredenciaisDTO } from "../models/credenciais.dto";
 import { API_CONFIG } from "../config/api.config";
 import { LocalUser } from "../models/local_user";
 import { StorageService } from "./storage.service";
+import { CartService } from "./domain/cart.service";
 
 
 @Injectable()
@@ -14,7 +15,7 @@ export class AuthService{
 
   jwtHelper: JwtHelper = new JwtHelper();
 
-  constructor(public http: HttpClient, public storage : StorageService){
+  constructor(public http: HttpClient, public storage : StorageService , public cartService : CartService){
   }
 
   authenricate (creds: CredenciaisDTO){
@@ -44,6 +45,7 @@ export class AuthService{
       token: tok,
       email: this.jwtHelper.decodeToken(tok).sub
     };
+    this.cartService.createOrClearCart();
     this.storage.setLocalUser(user);
   }
 
