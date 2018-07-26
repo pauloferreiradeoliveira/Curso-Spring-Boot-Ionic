@@ -28,12 +28,12 @@ export class ProdutosPage {
     this.items.forEach(element => {
       this.produtosService.getSmallImageFromBucket(element.id)
         .subscribe(response => {
-          element.imageUrl = this.produtosService.getUrlImagem(element.id);
+          element.imageUrl = this.produtosService.getUrlImagemSmall(element.id);
         }, error => {});
     });
   }
 
-  showDetail(){
-    this.navCtrl.push('ProdutoDetailPage');
+  showDetail(produto_id : string){
+    this.navCtrl.push('ProdutoDetailPage', {produto_id : produto_id});
   }
 }
