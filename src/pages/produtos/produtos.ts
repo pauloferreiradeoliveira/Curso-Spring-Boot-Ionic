@@ -20,7 +20,17 @@ export class ProdutosPage {
     this.produtosService.findByCategoria(categoria_id)
       .subscribe(response => {
         this.items = response['content'];
+        this.loadImageUrls();
       }, error => {});
+  }
+
+  loadImageUrls(){
+    this.items.forEach(element => {
+      this.produtosService.getSmallImageFromBucket(element.id)
+        .subscribe(response => {
+          element.imageUrl = this.produtosService.getUrlImagem(element.id);
+        }, error => {});
+    });
   }
 
 }
