@@ -1,3 +1,5 @@
+// Para salvar no LocalStorage
 export const STORAGE_kEYS = {
-  localUser: "localUser"
+  localUser: "localUser",
+  cart: "Carrilnho"
 }
